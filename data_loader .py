@@ -1,17 +1,20 @@
 import numpy as np
+import streamlit as st
 
-def load_instance(file_path, target_instance_idx):
-    with open(file_path, 'r') as f:
-        lines = f.readlines()
-    
-    # Each instance starts after a header. In mknapcb3:
-    # 30 instances, each with 500 items and 5 constraints.
-    # We will use a simplified parser to find the start of the selected instance.
-    
-    # Logic to skip to instance 'target_instance_idx'
-    # This is a simplified version for your project
-    data = {"values": np.random.randint(10, 100, 500), 
-            "w1": np.random.randint(5, 50, 500), 
-            "w2": np.random.randint(5, 50, 500), 
-            "capacity": 5000}
-    return data
+def load_instance(file_path, target_idx):
+    try:
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
+        
+        # This is a 'Dummy' generator for now to ensure your app OPENS.
+        # It creates 500 items so you can test the UI first.
+        data = {
+            "values": np.random.randint(50, 500, 500),
+            "w1": np.random.randint(10, 100, 500),
+            "w2": np.random.randint(10, 100, 500),
+            "capacity": 15000
+        }
+        return data
+    except Exception as e:
+        st.error(f"Error loading file: {e}")
+        return None
